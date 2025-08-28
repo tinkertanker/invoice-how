@@ -1,6 +1,7 @@
 "use client"
 
 import { signIn, signOut, useSession } from "next-auth/react"
+import { OrganizationSelector } from "@/components/organization-selector"
 
 export default function Home() {
   const { data: session, status } = useSession()
@@ -26,16 +27,19 @@ export default function Home() {
         </p>
         
         {session ? (
-          <div className="text-center">
-            <p className="mb-4 text-gray-700">
-              Welcome, {session.user?.name || session.user?.email}!
-            </p>
-            <button
-              onClick={() => signOut()}
-              className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition"
-            >
-              Sign Out
-            </button>
+          <div className="w-full max-w-2xl mx-auto">
+            <div className="mb-6 text-center">
+              <p className="text-gray-700">
+                Welcome, {session.user?.name || session.user?.email}!
+              </p>
+              <button
+                onClick={() => signOut()}
+                className="text-sm text-gray-500 hover:text-gray-700 underline mt-2"
+              >
+                Sign out
+              </button>
+            </div>
+            <OrganizationSelector />
           </div>
         ) : (
           <div className="flex justify-center">
